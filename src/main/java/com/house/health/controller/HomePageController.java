@@ -10,6 +10,7 @@ import com.house.health.entity.FindReq;
 import com.house.health.entity.House;
 import com.house.health.service.IHouserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,19 +22,21 @@ import java.util.Map;
 
 @Controller
 public class HomePageController {
-	
+
 	@Autowired
 	private IHouserService service;
 	@Resource
 	private HouseMapper houseMapper;
 	private static final int PAGE_SIZE = 10;
-	
+	@Value("${pic.requestPath:http://localhost:8090/images/}")
+	private String requestPath;
 	@RequestMapping("/toIndexPage")
 	public String toIndexPage(HttpServletRequest request) {
 		List<House> findHomeInfo = service.findHomeInfo();
 		request.getSession().setAttribute("House", findHomeInfo);
 		return "index";
 	}
+
 	@RequestMapping("/findHouse")
 	public String findHouse(FindReq req, HttpServletRequest request) {
 		String keywords = request.getParameter("keywords");
@@ -49,6 +52,9 @@ public class HomePageController {
 		int totalRecords = houseMapper.countHouseByParams(params);
 		int totalPages = (int) Math.ceil((double) totalRecords / PAGE_SIZE);
 		List<House> findHomeInfo = houseMapper.findHouseByParams(params);
+		for (House house : findHomeInfo) {
+			house.setHouseImage(requestPath + house.getHouseImage());
+		}
 		request.getSession().removeAttribute("House");
 		request.getSession().setAttribute("House", findHomeInfo);
 		// 设置属性
@@ -72,7 +78,7 @@ public class HomePageController {
 //		request.setAttribute("totalPages", totalPages);
 //		return "index";
 //	}
-	
+
 	@RequestMapping("/findHousrOrderByAsc")
 	public String findHousrOrderByAsc(HttpServletRequest request) {
 		List<House> findHomeInfo = service.findHouseOrderByAsc();
@@ -80,7 +86,7 @@ public class HomePageController {
 		request.getSession().setAttribute("House", findHomeInfo);
 		return "index";
 	}
-	
+
 	@RequestMapping("/findHousrOrderByDesc")
 	public String findHousrOrderByDesc(HttpServletRequest request) {
 		List<House> findHomeInfo = service.findHouseOrderByDesc();

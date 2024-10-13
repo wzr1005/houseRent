@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.house.health.entity.House;
 import com.house.health.service.IHouserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,14 +19,15 @@ public class HouseDetailsController {
 	
 	@Autowired
 	private IHouserService service;
-	
+	@Value("${pic.requestPath:http://localhost:8090/images/}")
+	private String requestPath;
 	@RequestMapping("/toDetailsPage")
 	public String toDetailsPage(int id,HttpServletRequest request) {
 		House HouseDetails = service.findHouseDetailsById(id);
 		List<String> list = new ArrayList<String>();
 		String[] split = HouseDetails.getHouseDetailsImg().split("~");
 		for(int i=0;i<split.length;i++) {
-			list.add(split[i]);
+			list.add(requestPath + split[i]);
 		}
 		request.getSession().setAttribute("Details", HouseDetails);
 		request.getSession().setAttribute("DetailsImg", list);
