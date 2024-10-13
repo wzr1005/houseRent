@@ -168,6 +168,7 @@
         	<c:forEach items="${House }" var="h">
 	            <li>
 	                <a href="toDetailsPage?id=${h.hID }" class="show-image">
+                        console.log(${h.houseImage })
 	                    <img src="${h.houseImage }" width="240px" height="180px">
 	                </a>
 	                <div class="show-details">
