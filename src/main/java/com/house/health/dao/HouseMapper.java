@@ -3,8 +3,11 @@ package com.house.health.dao;
 import com.house.health.entity.House;
 import com.house.health.entity.Page;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Mapper
 public interface HouseMapper {
@@ -49,7 +52,10 @@ public interface HouseMapper {
 	 * @param keywords
 	 * @return
 	 */
+	public List<House> findHouseByParams(@Param("params")Map<String, Object> params);
 	public List<House> findHouseByLike(String keywords);
+
+	int countHouseByParams(@Param("params") Map<String, Object> params);
 	/**
 	 * 降序查询
 	 * @return

@@ -20,8 +20,8 @@ public class UserInterceptor implements HandlerInterceptor {
 		String url = request.getRequestURL().toString();
 
 		if (url.indexOf("toIndexPage") >= 0 || url.indexOf("login") >= 0 || url.indexOf("regist") >= 0
-				|| url.indexOf("toDetailsPage") >= 0 || url.indexOf("findHouseByLike") >= 0
-				|| url.indexOf("findHousrOrderByAsc") >= 0 || url.indexOf("findHousrOrderByDesc") >= 0
+				|| url.indexOf("toDetailsPage") >= 0
+				|| url.indexOf("findHouse") >= 0
 				|| url.indexOf("toAdminLogin") >= 0||url.indexOf("adminAccess")>=0) {
 			return true;
 		}

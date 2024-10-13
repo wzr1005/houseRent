@@ -105,21 +105,47 @@
 		WHERE
 			h_id = #{hID}
 	</update>
-	
-	<!-- 条件搜索 -->
 	<select id="findHouseByLike" parameterType="string" resultMap="BasicMap">
+			select * from t_house where house_desc like CONCAT("%", #{keywords}, "%")
+	</select>
+	<!-- 条件搜索 -->
+	<select id="findHouseByParams" parameterType="Map" resultMap="BasicMap">
 		SELECT
-			*
+		*
 		FROM
-			t_house h
-		WHERE
-			CONCAT(
+		t_house h
+		<where>
+			<if test="params.keywords!= null and params.keywords!= ''">
+				AND CONCAT(
 				h.community_name,
 				h.house_desc,
 				h.house_model
-			) LIKE CONCAT("%", #{keywords}, "%")
+				) LIKE CONCAT("%", #{params.keywords}, "%")
+			</if>
+		</where>
+		<if test="params.orderBy != null">
+			<if test="params.orderBy == 'desc'">
+				order by house_price desc
+			</if>
+		</if>
+		limit #{params.offset},#{params.pageSize}
 	</select>
-	
+	<!-- 条件搜索 -->
+	<select id="countHouseByParams" parameterType="Map" resultType="Integer">
+		SELECT
+			count(*)
+		FROM
+			t_house h
+		<where>
+			<if test="params.keywords!= null and params.keywords!= ''">
+				AND CONCAT(
+					h.community_name,
+					h.house_desc,
+					h.house_model
+				) LIKE CONCAT("%", #{params.keywords}, "%")
+			</if>
+		</where>
+	</select>
 	<select id="findHouseOrderByDesc" resultMap="BasicMap">
 		SELECT * FROM t_house h ORDER BY house_price DESC
 	</select>

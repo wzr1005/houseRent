@@ -6,10 +6,39 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/layui/css/layui.css"/>
-    <title>房屋租赁网</title>
+    <title>青苗长安租房网</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/global.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.css">
     <script src="${pageContext.request.contextPath}/static/layui/layui.js"></script>
 </head>
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .pagination a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+        border: 1px solid #ddd;
+        margin: 0 4px;
+    }
+
+    .pagination a:hover {
+        background-color: #ddd;
+    }
+
+    .pagination a.active {
+        background-color: #ffc924;
+        color: white;
+        border: 1px solid #fefefe;
+        cursor: not-allowed;
+    }
+</style>
 <body>
 <div class="layui-carousel" id="bg-item">
     <div class="layui-header title">
@@ -32,7 +61,7 @@
     <!--搜索框-->
     <div class="layui-container">
         <div class="seach-input">
-           	<form class="seach-form layui-form" method="post" action="findHouseByLike">
+           	<form class="seach-form layui-form" method="post" action="findHouse">
 	           <div class="layui-pull-left input">
 	                <input type="text" placeholder="请输入房源特征、房型、小区名..." name="keywords" class="seach layui-input"  lay-verify="">
 	           </div>
@@ -120,6 +149,7 @@
 <div class="list_control_bar layui-container" style="padding: 0">
     <div>
         <div class="list_title layui-pull-left"><span>全部房源</span></div>
+        <div class="list_title layui-pull-left"><span>部分房源</span></div>
         <div class="list_more">
             <ul class="layui-pull-right list-item">
                 <li class="click-this"><a href="toIndexPage">默认排序</a></li>
@@ -132,7 +162,7 @@
 
 <section class="layui-container">
     <hr>
-    <h2>共找到<span style="color: #ffc601;margin: 0 5px;">${House.size()}</span>套出租房源</h2>
+    <h2>共找到<span style="color: #ffc601;margin: 0 5px;">${totalRecords}</span>套出租房源</h2>
     <div class="house-detail">
         <ul>
         	<c:forEach items="${House }" var="h">
@@ -170,6 +200,24 @@
 	            </li>
         	</c:forEach>
         </ul>
+    </div>
+    <div class="pagination" >
+        <c:if test="${currentPage > 1}">
+            <a href="?pageNum=${currentPage - 1}">« 上一页</a>
+        </c:if>
+        <c:forEach begin="1" end="${totalPages}" var="i">
+            <c:choose>
+                <c:when test="${currentPage eq i}">
+                    <a class="active">${i}</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="?pageNum=${i}">${i}</a>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+        <c:if test="${currentPage lt totalPages}">
+            <a href="?pageNum=${currentPage + 1}">下一页 »</a>
+        </c:if>
     </div>
 </section>
 <footer>
