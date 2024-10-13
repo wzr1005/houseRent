@@ -28,11 +28,14 @@ public class HomePageController {
 	@Resource
 	private HouseMapper houseMapper;
 	private static final int PAGE_SIZE = 10;
-	@Value("${pic.requestPath:}")
+	@Value("${pic.requestPath:http://localhost:8090/images/}")
 	private String requestPath;
 	@RequestMapping("/toIndexPage")
 	public String toIndexPage(HttpServletRequest request) {
 		List<House> findHomeInfo = service.findHomeInfo();
+		for (House house : findHomeInfo) {
+			house.setHouseImage(requestPath + house.getHouseImage());
+		}
 		request.getSession().setAttribute("House", findHomeInfo);
 		return "index";
 	}

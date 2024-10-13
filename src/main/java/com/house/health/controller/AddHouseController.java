@@ -33,7 +33,7 @@ public class AddHouseController {
 	private String simplePath = "";
 	// 详细图片地址
 	private StringBuilder detailsPath = new StringBuilder();
-	
+
 	@Autowired
 	private IHouserService service;
 
@@ -76,7 +76,7 @@ public class AddHouseController {
 	@RequestMapping("/singleUpload")
 	@ResponseBody
 	public Map<String, Object> singleUpload(@RequestParam("file") MultipartFile file, HttpServletRequest req,
-			HttpSession session) {
+											HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			String suffixName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
@@ -88,6 +88,7 @@ public class AddHouseController {
 			//创建虚拟路径存储
 			simplePath = filename;
 			map.put("image", simplePath);
+			System.out.println(dirPath);
 			file.transferTo(new File(dirPath + filename));
 			map.put("code", 0);
 			map.put("msg", "上传成功");
@@ -98,12 +99,12 @@ public class AddHouseController {
 		}
 		return map;
 	}
-	
+
 	@RequestMapping("/addHouse")
 	public String addHouse() {
 		return "addhouse";
 	}
-	
+
 	@RequestMapping("/addHouseRecord")
 	@ResponseBody
 	public String addHouse(House house) {
