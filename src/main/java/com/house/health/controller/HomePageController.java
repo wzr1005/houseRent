@@ -28,7 +28,7 @@ public class HomePageController {
 	@Resource
 	private HouseMapper houseMapper;
 	private static final int PAGE_SIZE = 10;
-	@Value("${pic.requestPath:http://localhost:8090/images/}")
+	@Value("${pic.requestPath:}")
 	private String requestPath;
 	@RequestMapping("/toIndexPage")
 	public String toIndexPage(HttpServletRequest request) {
