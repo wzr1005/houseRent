@@ -24,8 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class AddHouseController {
 
-	private String str = this.getClass().getClassLoader().getResource("houseImages/1.txt").getPath();
-	private String dirPath = str.substring(0,str.lastIndexOf("1.txt"));
+	private String str = System.getProperty("user.dir") + "src/main/resources/houseImages";
+	private String dirPath = System.getProperty("user.dir") + "src/main/resources/houseImages";
 	@Value("${pic.requestPath:http://localhost:8090/images/}")
 	private String requestPath;
 //	private String dirPath = "classpath:/houseImages/";
