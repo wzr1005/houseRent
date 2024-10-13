@@ -24,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class AddHouseController {
 
 	private String str = this.getClass().getClassLoader().getResource("houseImages/1.txt").getPath();
-	private String dirPath = str.substring(1,str.length()-5);
+	private String dirPath = str.substring(0,str.lastIndexOf("1.txt"));
 
 	//private String dirPath = "classpath:/houseImages/";
 	// 简介图片地址
