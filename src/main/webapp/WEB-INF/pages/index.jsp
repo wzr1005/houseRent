@@ -61,7 +61,7 @@
     <!--搜索框-->
     <div class="layui-container">
         <div class="seach-input">
-           	<form class="seach-form layui-form" method="post" action="findHouse">
+           	<form class="seach-form layui-form" method="post" action="findHouse?a=1">
 	           <div class="layui-pull-left input">
 	                <input type="text" placeholder="请输入房源特征、房型、小区名..." name="keywords" class="seach layui-input"  lay-verify="">
 	           </div>
@@ -153,8 +153,8 @@
         <div class="list_more">
             <ul class="layui-pull-right list-item">
                 <li class="click-this"><a href="toIndexPage">默认排序</a></li>
-                <li><a href="findHousrOrderByAsc">价格升序</a></li>
-                <li><a href="findHousrOrderByDesc">价格降序</a></li>
+                <li><a href="findHouse?orderBy=asc">价格升序</a></li>
+                <li><a href="findHouse?orderBy=desc">价格降序</a></li>
             </ul>
         </div>
     </div>
@@ -203,7 +203,7 @@
     </div>
     <div class="pagination" >
         <c:if test="${currentPage > 1}">
-            <a href="?pageNum=${currentPage - 1}">« 上一页</a>
+            <a href="&pageNum=${currentPage - 1}">« 上一页</a>
         </c:if>
         <c:forEach begin="1" end="${totalPages}" var="i">
             <c:choose>
@@ -211,12 +211,12 @@
                     <a class="active">${i}</a>
                 </c:when>
                 <c:otherwise>
-                    <a href="?pageNum=${i}">${i}</a>
+                    <a href="&pageNum=${i}">${i}</a>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
         <c:if test="${currentPage lt totalPages}">
-            <a href="?pageNum=${currentPage + 1}">下一页 »</a>
+            <a href="&pageNum=${currentPage + 1}">下一页 »</a>
         </c:if>
     </div>
 </section>
