@@ -25,10 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class AddHouseController {
 
 	private String str = this.getClass().getClassLoader().getResource("houseImages/1.txt").getPath();
-//	private String dirPath = str.substring(0,str.lastIndexOf("1.txt"));
+	private String dirPath = str.substring(0,str.lastIndexOf("1.txt"));
 	@Value("${pic.requestPath:http://localhost:8090/images/}")
 	private String requestPath;
-	private String dirPath = "classpath:/houseImages/";
+//	private String dirPath = "classpath:/houseImages/";
 	// 简介图片地址
 	private String simplePath = "";
 	// 详细图片地址
