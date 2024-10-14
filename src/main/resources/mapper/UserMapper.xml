@@ -4,18 +4,19 @@
 	<resultMap type="com.house.health.entity.Users" id="BasicMap">
 		<id column="u_id" jdbcType="INTEGER" property="uID" />
 		<result column="u_name" jdbcType="VARCHAR" property="uName"/>
+		<result column="role" jdbcType="VARCHAR" property="role"/>
 		<result column="u_password" jdbcType="VARCHAR" property="uPassword"/>
 		<result column="u_phone_number" jdbcType="VARCHAR" property="uPhoneNumber"/>
 		<result column="u_nickname" jdbcType="VARCHAR" property="uNickName"/>
 	</resultMap>
 	<!-- 登录 -->
 	<select id="login" resultMap="BasicMap" parameterType="com.house.health.entity.Users">
-		select u_id,u_name,u_password,u_phone_number,u_nickname from t_users
+		select u_id,u_name,u_password,role,u_phone_number,u_nickname from t_users
 		where u_name=#{uName} and u_password=#{uPassword}
 	</select>
 	<!-- 注册 -->
 	<insert id="regist" parameterType="com.house.health.entity.Users">
-		insert into t_users values(0,#{uName},#{uPassword},#{uPhoneNumber},#{uNickName})
+		insert into t_users values(0,#{uName},#{role},#{uPassword},#{uPhoneNumber},#{uNickName})
 	</insert>
 	
 	<!-- 检查旧密码 -->

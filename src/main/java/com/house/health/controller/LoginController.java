@@ -42,6 +42,8 @@ public class LoginController {
 	@ResponseBody
 	public String regist(Users user) {
 		int regist;
+		// 普通用户
+		user.setRole("user");
 		try {
 			regist = mapper.regist(user);
 			if(regist>0) {

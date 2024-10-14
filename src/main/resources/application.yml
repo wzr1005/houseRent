@@ -21,6 +21,8 @@ spring:
 # ??????
   devtools:
     add-properties: false
+  resources:
+    static-locations: classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/houseImages/
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
@@ -28,5 +30,5 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 
-pic:
-  requestPath: http://111.229.176.141:8090/images/
+#pic:
+#  requestPath: http://111.229.176.141:8090/images/

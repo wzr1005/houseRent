@@ -55,9 +55,9 @@ public class HomePageController {
 		int totalRecords = houseMapper.countHouseByParams(params);
 		int totalPages = (int) Math.ceil((double) totalRecords / PAGE_SIZE);
 		List<House> findHomeInfo = houseMapper.findHouseByParams(params);
-		for (House house : findHomeInfo) {
-			house.setHouseImage(requestPath + house.getHouseImage());
-		}
+//		for (House house : findHomeInfo) {
+//			house.setHouseImage(requestPath + house.getHouseImage());
+//		}
 		request.getSession().removeAttribute("House");
 		request.getSession().setAttribute("House", findHomeInfo);
 		// 设置属性

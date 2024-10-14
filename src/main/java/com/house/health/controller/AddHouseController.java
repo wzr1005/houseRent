@@ -24,8 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class AddHouseController {
 
-	private String str = System.getProperty("user.dir") + "src/main/resources/houseImages";
-	private String dirPath = System.getProperty("user.dir") + "src/main/resources/houseImages/";
+	private String str = System.getProperty("user.dir") + "/src/main/resources/houseImages";
+	private String dirPath = System.getProperty("user.dir") + "/src/main/resources/houseImages/";
 	@Value("${pic.requestPath:http://localhost:8090/images/}")
 	private String requestPath;
 //	private String dirPath = "classpath:/houseImages/";
@@ -88,7 +88,7 @@ public class AddHouseController {
 			//创建虚拟路径存储
 			simplePath = filename;
 			map.put("image", simplePath);
-			System.out.println(dirPath);
+			System.out.println(dirPath + filename);
 			file.transferTo(new File(dirPath + filename));
 			map.put("code", 0);
 			map.put("msg", "上传成功");

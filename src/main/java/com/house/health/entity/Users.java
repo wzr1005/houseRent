@@ -8,6 +8,7 @@ public class Users {
 
 	private int uID;
 	private String uName;
+	private String role;
 	private String uPassword;
 	private String uPhoneNumber;
 	private String uNickName;
@@ -22,6 +23,14 @@ public class Users {
 
 	public String getuName() {
 		return uName;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public void setuName(String uName) {

@@ -40,15 +40,26 @@
                 </dl>
             </li>
         </ul>
-        <ul class="layui-nav layui-nav-tree" lay-filter="test">
-            <li class="layui-nav-item">
-                <a href="javascript:;">房源信息管理</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="addHouse" target="iframe">发布房源信息</a></dd>
-                    <dd><a href="toUserRentalPage" target="iframe">我发布的信息</a></dd>
-                </dl>
-            </li>
-        </ul>
+        <c:if test="${loginUser.role == '商家'}">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">房源信息管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="addHouse" target="iframe">发布房源信息</a></dd>
+                        <dd><a href="toUserRentalPage" target="iframe">我发布的信息</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </c:if>
+<%--        <ul class="layui-nav layui-nav-tree" lay-filter="test">--%>
+<%--            <li class="layui-nav-item">--%>
+<%--                <a href="javascript:;">房源信息管理</a>--%>
+<%--                <dl class="layui-nav-child">--%>
+<%--                    <dd><a href="addHouse" target="iframe">发布房源信息</a></dd>--%>
+<%--                    <dd><a href="toUserRentalPage" target="iframe">我发布的信息</a></dd>--%>
+<%--                </dl>--%>
+<%--            </li>--%>
+<%--        </ul>--%>
     </div>
     <div class="layui-body">
         <iframe src="welcome" width="100%" height="100%" frameborder="0" name="iframe" scrolling="auto" seamless></iframe>
